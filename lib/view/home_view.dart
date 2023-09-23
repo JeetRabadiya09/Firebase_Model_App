@@ -1,10 +1,8 @@
-import 'dart:convert';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
-import '../../model/to_do_model.dart';
+
+import '../model/to_do_model.dart';
 import '../res/constant.dart';
 import 'add_todo.dart';
 
@@ -17,53 +15,45 @@ class HomeView extends StatefulWidget {
 
 class _HomeViewState extends State<HomeView> {
   FirebaseFirestore firestore = FirebaseFirestore.instance;
-  List<ToDoModelData> toDoModelList = [];
-  SharedPreferences? prefs;
-
-  setInstance() async {
-    prefs = await SharedPreferences.getInstance();
-    getToDOData();
-  }
-
-  getToDOData() async {
-    Constant.toDoModelList =
-        (json.decode(prefs!.getString("ToDoList")!) as List)
-            .map((value) => ToDoModelData.fromJson(value))
-            .toList();
-    setState(() {});
-  }
-
-  @override
-  void initState() {
-    // TODO: implement initState
-    setInstance();
-    super.initState();
-  }
-
+  List<ToDoModel> toDoData = [];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text("To - Do View"),
       ),
-      body: Constant.toDoModelList.isEmpty
-          ? const Center(
-              child: Text(
-                "No To-Do Found",
-                style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            )
-          : ListView.separated(
-              itemCount: Constant.toDoModelList.length,
-              padding: const EdgeInsets.all(15),
-              separatorBuilder: (context, index) => const SizedBox(height: 15),
-              itemBuilder: (context, index) => ListTile(
-                title: Text(toDoModelList[index].title ?? ""),
-                subtitle: Text(toDoModelList[index].subtitle ?? ""),
-              ),
+      body: StreamBuilder<QuerySnapshot>(
+        stream: firestore.collection("ToDoFire").snapshots(includeMetadataChanges: true),
+        builder: (context, AsyncSnapshot<QuerySnapshot> snapshot){
+          if (snapshot.hasError){
+            return const Center(
+              child: Text("Something went wrong............",style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold,),),
+            );
+          }
+          if (snapshot.connectionState == ConnectionState.waiting){
+            return const Center(child: CircularProgressIndicator(),);
+          }
+          if
+        }
+      )
+      // Constant.toDoModelList.isEmpty
+      //     ? const Center(
+      //         child: Text(
+      //           "No To-Do Found",
+      //           style: TextStyle(
+      //             fontSize: 20,
+      //             fontWeight: FontWeight.bold,
+      //           ),
+      //         ),
+      //       )
+      //     : ListView.separated(
+      //         itemCount: Constant.toDoModelList.length,
+      //         padding: const EdgeInsets.all(15),
+      //         separatorBuilder: (context, index) => const SizedBox(height: 15),
+      //         itemBuilder: (context, index) => ListTile(
+      //           title: Text(toDoModelList[index].title ?? ""),
+      //           subtitle: Text(toDoModelList[index].subtitle ?? ""),
+      //         ),
               //     Container(
               //   padding: const EdgeInsets.all(15),
               //   width: double.infinity,

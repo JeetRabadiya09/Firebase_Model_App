@@ -1,8 +1,5 @@
-import 'dart:convert';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../model/to_do_model.dart';
 import '../res/constant.dart';
@@ -71,12 +68,12 @@ class _AddTodoState extends State<AddTodo> {
 //   super.initState();
 // }
   String time = "";
-
-  SharedPreferences? prefs;
-
-  setInstance() async {
-    prefs = await SharedPreferences.getInstance();
-  }
+//
+//   SharedPreferences? prefs;
+//
+//   setInstance() async {
+//     prefs = await SharedPreferences.getInstance();
+//   }
 
   TimeOfDay timeOfDay = TimeOfDay.now();
   Future displayTimePicker(BuildContext context) async {
@@ -92,18 +89,18 @@ class _AddTodoState extends State<AddTodo> {
       });
     }
   }
-
-  setTodoData() {
-    prefs!.setString(
-        "ToDoModelData",
-        json.encode(
-            Constant.toDoModelList.map((value) => value.tojson!()).toList()));
-  }
+  //
+  // setTodoData() {
+  //   prefs!.setString(
+  //       "ToDoModelData",
+  //       json.encode(
+  //           Constant.toDoModelList.map((value) => value.tojson!()).toList()));
+  // }
 
   @override
   void initState() {
     // TODO: implement initState
-    setInstance();
+    // setInstance();
     userdata();
 
     if (widget.index != null) {
@@ -226,7 +223,7 @@ class _AddTodoState extends State<AddTodo> {
                     );
                     setState(() {});
                   }
-                  setTodoData();
+                  // setTodoData();
                   Navigator.pop(context);
                 },
                 child: Text(widget.index == null ? "Add To-do" : "Edit To-Do"),

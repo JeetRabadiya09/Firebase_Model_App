@@ -1,40 +1,31 @@
 import 'dart:convert';
 
-ToDoModelData toDoModelDataFromJson(String str) =>
-    ToDoModelData.fromJson(json.decode(str));
+List<ToDoModel> todomodelFromjson(String str) =>
+    List<ToDoModel>.from(json.decode(str).map((x) => ToDoModel.fromjson(x)));
 
-String toDoModelDataToJson(ToDoModelData data) => json.encode(data.tojson());
+String todomodeltojson(List<ToDoModel> data) =>
+    json.encode(List<dynamic>.from(data.map((x) => x.tojson())));
 
-class ToDoModelData {
+class ToDoModel {
   String? title;
-  String? subtitle;
+  String? content;
   String? time;
 
-  ToDoModelData({
+  ToDoModel({
     this.title,
-    this.subtitle,
+    this.content,
     this.time,
   });
-  //
-  // ToDoModelData.fromJson(Map<String, dynamic> json) {
-  //   title = json['title'];
-  //   subtitle = json['subtitle'];
-  //   time = json['time'];
-  // }
-  factory ToDoModelData.fromJson(Map<String, dynamic> json) => ToDoModelData(
-        title: json['title'],
-        subtitle: json['subtitle'],
-        time: json['time'],
+
+  factory ToDoModel.fromjson(Map<String, dynamic> json) => ToDoModel(
+        title: json["title"],
+        content: json["content"],
+        time: json["time"],
       );
-  // get toJson => null;
+
   Map<String, dynamic> tojson() => {
         "title": title,
-        "subtitle": subtitle,
+        "content": content,
         "time": time,
       };
-// ToDoModelData.tojson(Map<String, dynamic> json) {
-//   title = json['title'];
-//   content = json['content'];
-//   time = json['time'];
-// }
 }
