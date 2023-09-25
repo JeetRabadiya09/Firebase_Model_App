@@ -93,8 +93,8 @@ class _AddEditToDoViewState extends State<AddEditToDoView> {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     double screenHeight = size.height;
-    double screenWidth = size.width;
-    EdgeInsets devicePadding = MediaQuery.of(context).viewPadding;
+    // double screenWidth = size.width;
+    // EdgeInsets devicePadding = MediaQuery.of(context).viewPadding;
 
     return Scaffold(
       appBar: AppBar(
