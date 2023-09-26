@@ -38,6 +38,10 @@ dependencies:
   firebase_core: ^2.16.0
   cloud_firestore: ^4.9.2
   fluttertoast: ^8.2.2
+  image_picker: ^1.0.4
+  firebase_storage: ^11.2.7
+
+
 
 dev_dependencies:
   flutter_test:
@@ -90,3 +94,19 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
+  I am a Flutter Developer To
+  use my skills in the best
+  possible way for achieving 
+  the company's goal and to
+  work with organization on 
+  which have core values such
+  as diversity and satisfactory
+
+
+Aspiring Flutter developer
+with a zeal for crafting 
+seamless mobile applications.
+Enthusiastic about learning
+and applying cutting-edge
+technologies to deliver
+user-friendly solutions.
