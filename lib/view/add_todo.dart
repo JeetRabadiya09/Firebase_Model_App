@@ -25,6 +25,9 @@ class _AddEditToDoViewState extends State<AddEditToDoView> {
     var timeData = await showTimePicker(
       context: context,
       initialTime: timeOfDay,
+    );  var timeData = await showTimePicker(
+      context: context,
+      initialTime: timeOfDay,
     );
 
     if (timeData != null) {
